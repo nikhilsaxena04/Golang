@@ -1,5 +1,4 @@
 package main
-
 import "fmt"
 
 // Book struct represents a book in the library

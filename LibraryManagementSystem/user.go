@@ -27,3 +27,35 @@ func ShowUsers(){
 		fmt.Printf("ID: %d | Name: %s\n", user.ID, user.Name)
 	}
 }
+
+
+
+// Borrower interface
+type Borrower interface {
+	BorrowBook(bookID int)
+	ReturnBook(bookID int)
+}
+
+// BorrowBook method for User
+func (u User) BorrowBook(bookID int){
+	for i, book:= range books {
+		if book.ID == bookID && !book.IsBorrowed {
+			books[i].IsBorrowed = true
+			fmt.Printf("%s borrowed '%s'.\n", u.Name, book.Title)
+			return
+		}
+	}
+	fmt.Println("Book not available!")
+}
+
+// ReturnBook method for User
+func (u User) ReturnBook(bookID int){
+	for i, book:= range books {
+		if book.ID == bookID && book.IsBorrowed {
+			books[i].IsBorrowed = false
+			fmt.Printf("%s returned '%s'.\n", u.Name, book.Title)
+			return
+		}
+	}
+	fmt.Println("Book not returned!")
+}

@@ -37,7 +37,7 @@ type Borrower interface {
 }
 
 // BorrowBook method for User
-func (u User) BorrowBook(bookID int){
+func (u *User) BorrowBook(bookID int){
 	for i, book:= range books {
 		if book.ID == bookID && !book.IsBorrowed {
 			books[i].IsBorrowed = true
@@ -49,7 +49,7 @@ func (u User) BorrowBook(bookID int){
 }
 
 // ReturnBook method for User
-func (u User) ReturnBook(bookID int){
+func (u *User) ReturnBook(bookID int){
 	for i, book:= range books {
 		if book.ID == bookID && book.IsBorrowed {
 			books[i].IsBorrowed = false
@@ -57,5 +57,7 @@ func (u User) ReturnBook(bookID int){
 			return
 		}
 	}
-	fmt.Println("Book not returned!")
+	fmt.Println("This book was not borrowed!")
 }
+		/*method receiver(*User) is a pointer to User
+		This allows the method to modify the User struct directly not the copy of it*/
